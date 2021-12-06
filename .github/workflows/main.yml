@@ -8,6 +8,7 @@ on:
   #push:
  # branches: [ master ]
 
+
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
   repository_dispatch:
@@ -42,14 +43,14 @@ jobs:
         uses: airvzxf/ftp-deployment-action@latest
         with:
           # FTP Server.
-          server: 31.170.161.39
+          server: ${{ secrets.SERVER }}
           # FTP User.
-          user: u107731145.maverickstudio.test.pl
+          user: ${{ secrets.USER }}
           # FTP Password.
           password: ${{ secrets.PASSWORD }}
           # Local directory.
           local_dir: './public'
           # Remote directory.
-          remote_dir: ./public_html
+          remote_dir: ./test
           # Delete all the files inside of the remote directory.
-          delete: ./public_html
+          delete: ./test
