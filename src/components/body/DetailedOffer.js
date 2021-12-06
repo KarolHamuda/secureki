@@ -3,7 +3,7 @@ import { Row, Col } from 'react-bootstrap';
 import styled from 'styled-components';
 import pierwszy from "../../assets/pierwszy.png"
 import { Link, graphql, useStaticQuery } from 'gatsby'
-
+import Img from 'gatsby-image'
 
 const Container = styled.div`
     height: 40em;
@@ -191,7 +191,7 @@ const StyledPointer = styled.div`
     } 
 `
 
-const Styledimg = styled.img`
+const Styledimg = styled(Img)`
     
     max-width: 31.25rem;
     margin-bottom: 0;
@@ -216,16 +216,29 @@ export const DetailedOffer = () => {
     const data = useStaticQuery(graphql`
     query {
         allStrapiArticle {
-        edges {
-            node {
-            id
-            content
-            title
+            edges {
+              node {
+                picture {
+                  localFile {
+                    id
+                    childImageSharp {
+                      fluid (quality: 100) {
+                        ...GatsbyImageSharpFluid
+                      }
+                    }
+                  }
+                }
+                id
+                content
+              }
             }
-        }
-        }
+          }
     }
     `)
+
+    const ImageQuery = data.allStrapiArticle.edges.map(document=>document.node.id === "Article_8" ? document.node.picture.localFile.childImageSharp.fluid : null)
+    const FilterQuery = ImageQuery.filter(document=>document !== null ? document : null )
+
     return (
         <div style={{background: "#FCF5F0"}}>
         <Container>
@@ -253,7 +266,7 @@ export const DetailedOffer = () => {
                     
                 </TextContainer>
                 <ImageContainer>
-                    <Styledimg src={pierwszy} />
+                    <Styledimg fluid={FilterQuery} />
                 </ImageContainer>
 
             </StyledRow>

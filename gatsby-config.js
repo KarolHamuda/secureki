@@ -26,6 +26,7 @@ module.exports = {
       },
     },
     `gatsby-transformer-sharp`,
+    `gatsby-image`,
     `gatsby-plugin-sharp`,
     {
       resolve: `gatsby-plugin-sharp`,
@@ -43,6 +44,14 @@ module.exports = {
           webpOptions: {},
           avifOptions: {},
         }
+      }
+    },
+    {
+      resolve:`gatsby-source-cloudinary`,
+      options: {
+      resourceType: `image`,
+      type: `type Value`,
+      prefix: `abc-xyz/`
       }
     },
     {

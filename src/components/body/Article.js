@@ -7,9 +7,11 @@ import square from "../../assets/decorations/square.svg"
 import circle from "../../assets/decorations/circle.svg"
 import smallcircle from "../../assets/decorations/smallcircle.svg"
 import { graphql, useStaticQuery } from 'gatsby'
+import { GatsbyImage } from "gatsby-plugin-image"
+import Img from 'gatsby-image'
 
 
-const StyledImage = styled.img`
+const StyledImage = styled(Img)`
     border-radius: 0;
     margin-bottom: 0;
     min-width: 42.875em;
@@ -235,14 +237,24 @@ export const Article = () => {
     const data = useStaticQuery(graphql`
     query {
         allStrapiArticle {
-        edges {
-            node {
-            id
-            content
+            edges {
+              node {
+                picture {
+                  localFile {
+                    id
+                    childImageSharp {
+                      fluid (quality: 100) {
+                        ...GatsbyImageSharpFluid
+                      }
+                    }
+                  }
+                }
+                id
+                content
+              }
             }
-        }
-        }
-        allStrapiButtons {
+          }
+          allStrapiButtons {
             edges {
               node {
                 id
@@ -252,10 +264,11 @@ export const Article = () => {
           }
     }
     `)
-    return (
-        
 
-        
+    const ImageQuery = data.allStrapiArticle.edges.map(document=>document.node.id === "Article_7" ? document.node.picture.localFile.childImageSharp.fluid : null)
+    const FilterQuery = ImageQuery.filter(document=>document !== null ? document : null )
+
+    return (
         <StyledContent>
         <StyledSquare src={square} />
         <StyledCircle src={circle} />
@@ -296,7 +309,7 @@ export const Article = () => {
             </>
 
             <FixedCol>
-                <StyledImage src={hero}/>
+                <StyledImage fluid={FilterQuery}/>
             </FixedCol>
         </FixedRow>   
         </StyledContent>
