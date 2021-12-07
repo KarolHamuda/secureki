@@ -7,6 +7,7 @@
   "dependencies": {
     "babel-plugin-styled-components": "^1.12.0",
     "bootstrap": "^4.6.0",
+    "caniuse-lite": "^1.0.30001285",
     "gatsby": "^3.7.2",
     "gatsby-image": "^3.11.0",
     "gatsby-plugin-gatsby-cloud": "^2.6.1",

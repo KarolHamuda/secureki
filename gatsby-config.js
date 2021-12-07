@@ -47,14 +47,6 @@ module.exports = {
       }
     },
     {
-      resolve:`gatsby-source-cloudinary`,
-      options: {
-      resourceType: `image`,
-      type: `type Value`,
-      prefix: `abc-xyz/`
-      }
-    },
-    {
       resolve: `gatsby-plugin-manifest`,
       options: {
         name: `Secureki`,
