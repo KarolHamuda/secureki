@@ -12,6 +12,7 @@ import rec from '../../assets/about/header/rec.svg'
 import Media from 'react-media';
 
 import { graphql, useStaticQuery } from 'gatsby'
+import Img from 'gatsby-image'
 
 const Layout = styled.div`
     max-width: 90em;
@@ -151,7 +152,7 @@ const ButtonContainer = styled.div`
     }
 `
 
-const StyledImage = styled.img`
+const StyledImage = styled(Img)`
     position: absolute;
     z-index: 2;
     width: 69.125rem;
@@ -217,14 +218,23 @@ export const AboutHeader = () => {
     const data = useStaticQuery(graphql`
     query {
         allStrapiAbout {
-        edges {
-            node {
-            id
-            content
-            title
-            bold
-            }
-        }
+            edges {
+                node {
+                  picture {
+                    localFile {
+                      id
+                      childImageSharp {
+                        fluid (quality: 100) {
+                          ...GatsbyImageSharpFluid
+                        }
+                      }
+                    }
+                  }
+                  id
+                  content
+                  title
+                }
+              }
         }
         allStrapiButtons {
             edges {
@@ -236,6 +246,13 @@ export const AboutHeader = () => {
           }
     }
     `)
+
+    const ImageQuery = data.allStrapiAbout.edges.map(document=>document.node.id === "About_1" ? document.node.picture.localFile.childImageSharp.fluid : null)
+    const FilterQuery = ImageQuery.filter(document=>document !== null ? document : null )
+
+    const ImageQuery2 = data.allStrapiAbout.edges.map(document=>document.node.id === "About_5" ? document.node.picture.localFile.childImageSharp.fluid : null)
+    const FilterQuery2 = ImageQuery2.filter(document=>document !== null ? document : null )
+
 return (
     <>
     <div style={{backgroundColor: "#FCF5F0"}}>
@@ -266,8 +283,8 @@ return (
                 }}>
                     {matches => (
                         <>
-                        {matches.large && <Wrapper><StyledImage src={image} /></Wrapper> }
-                        {matches.small && <Wrapper><StyledImage src={mobile} /></Wrapper> }
+                        {matches.large && <Wrapper><StyledImage fluid={FilterQuery} /></Wrapper> }
+                        {matches.small && <Wrapper><StyledImage fluid={FilterQuery2} /></Wrapper> }
                         </>
                     )}
                 </Media>
