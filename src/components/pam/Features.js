@@ -1,12 +1,6 @@
 import React, { useState } from 'react'
 import styled from 'styled-components'
 import { Row, Col } from 'react-bootstrap'
-
-import andrea from '../../assets/andrea.png'
-import cirbig from '../../assets/customer/cirbig.svg'
-import cirsmall from '../../assets/customer/cirsmall.svg'
-import rec from '../../assets/customer/rec.svg'
-import recempty from '../../assets/customer/recempty.svg'
 import { FeaturesBasicList } from './FeaturesBasicList.js'
 import { FeaturesAdvancedList } from './FeaturesAdvancedList.js'
 

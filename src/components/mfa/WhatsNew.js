@@ -2,7 +2,6 @@ import React from 'react'
 import styled from 'styled-components'
 import { Row, Col } from 'react-bootstrap'
 import Card from './Card.js'
-
 import { graphql, useStaticQuery } from 'gatsby'
 
 const Container = styled.div`
@@ -74,10 +73,6 @@ const StoriesCol = styled(Col)`
     display: flex;
 `
 
-
-
-
-
 export const WhatsNew = () => {
     const data = useStaticQuery(graphql`
     query {
@@ -107,6 +102,7 @@ export const WhatsNew = () => {
                     title={data.allStrapiMfa.edges.map(document=>document.node.id === "Mfa_5" ? document.node.title :  null)}
                     description={data.allStrapiMfa.edges.map(document=>document.node.id === "Mfa_5" ? document.node.content :  null)}
                     link="→ Get the eBook"
+                    picture='first'
                     />
                 </StoriesCol>
                 <StoriesCol>
@@ -114,6 +110,7 @@ export const WhatsNew = () => {
                     title={data.allStrapiMfa.edges.map(document=>document.node.id === "Mfa_6" ? document.node.title :  null)}
                     description={data.allStrapiMfa.edges.map(document=>document.node.id === "Mfa_6" ? document.node.content :  null)}
                     link="→ Get the eBook"
+                    picture='second'
                     />
                 </StoriesCol>
                 <StoriesCol>   
@@ -121,6 +118,7 @@ export const WhatsNew = () => {
                     title={data.allStrapiMfa.edges.map(document=>document.node.id === "Mfa_7" ? document.node.title :  null)}
                     description={data.allStrapiMfa.edges.map(document=>document.node.id === "Mfa_7" ? document.node.content :  null)}
                     link="→ Read the Article"
+                    picture='third'
                     />
                 </StoriesCol>
             </StyledRow>

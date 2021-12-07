@@ -1,7 +1,8 @@
 import React from 'react'
 import styled from 'styled-components'
-import { Row, Col } from 'react-bootstrap'
-import andrea from '../../assets/mfa/offer-4.png'
+import { Row } from 'react-bootstrap'
+import { graphql, useStaticQuery } from 'gatsby'
+import Img from 'gatsby-image'
 
 const Container = styled.div`
     width: 22.0625em;
@@ -26,7 +27,7 @@ const StyledRow = styled(Row)`
 
 
 
-const ImageContainer = styled.img`
+const ImageContainer = styled(Img)`
     border-radius: 0.8125em;
     border-radius: 0.8125em;
     -moz-border-radius: 0.8125em;
@@ -88,11 +89,46 @@ const LinkContainer = styled(Row)`
 
 `
 
-const Card = ({title, description, link}) => {
+const Card = ({title, description, link, picture}) => {
+    const data = useStaticQuery(graphql`
+    query {
+        allStrapiMfa {
+            edges {
+              node {
+                picture {
+                  localFile {
+                    id
+                    childImageSharp {
+                      fluid (quality: 100) {
+                        ...GatsbyImageSharpFluid
+                      }
+                    }
+                  }
+                }
+                id
+                content
+              }
+            }
+          }
+    }
+    `)
+
+    const ImageQuery1 = data.allStrapiMfa.edges.map(document=>document.node.id === "Mfa_5" ? document.node.picture.localFile.childImageSharp.fluid : null)
+    const FilterQuery1 = ImageQuery1.filter(document=>document !== null ? document : null )
+
+    const ImageQuery2 = data.allStrapiMfa.edges.map(document=>document.node.id === "Mfa_6" ? document.node.picture.localFile.childImageSharp.fluid : null)
+    const FilterQuery2 = ImageQuery2.filter(document=>document !== null ? document : null )
+
+    const ImageQuery3 = data.allStrapiMfa.edges.map(document=>document.node.id === "Mfa_7" ? document.node.picture.localFile.childImageSharp.fluid : null)
+    const FilterQuery3 = ImageQuery3.filter(document=>document !== null ? document : null )
+    
     return (
         <Container>
             <StyledRow>
-                <ImageContainer src={andrea} />
+                {picture === 'first' ?
+                <ImageContainer fluid={FilterQuery1} /> :
+                picture === 'second' ? <ImageContainer fluid={FilterQuery2} /> : <ImageContainer fluid={FilterQuery3} /> }
+                
             </StyledRow>
             <TitleContainer>
                 {title}

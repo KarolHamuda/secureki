@@ -1,13 +1,12 @@
 import React from 'react'
 import { Row, Col } from 'react-bootstrap'
 import styled from 'styled-components'
-import hero from "../../assets/hero NEW 1.png"
+
 import StyledButton from "../navbar/Button.js"
 import square from "../../assets/decorations/square.svg"
 import circle from "../../assets/decorations/circle.svg"
 import smallcircle from "../../assets/decorations/smallcircle.svg"
 import { graphql, useStaticQuery } from 'gatsby'
-import { GatsbyImage } from "gatsby-plugin-image"
 import Img from 'gatsby-image'
 
 

@@ -1,13 +1,11 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Row, Col } from 'react-bootstrap';
 import styled from 'styled-components';
-import second from "../../../assets/anna.png"
-import seconddesktop from "../../../assets/ann2.png"
-import firstdesktop from "../../../assets/chia2.png"
-import first from "../../../assets/chia.png"
 import group from "../../../assets/elementsgroup.svg"
 import squareslide from "../../../assets/decorations/squareslide.svg"
 import circleslide from "../../../assets/decorations/circleslide.svg"
+import { graphql, useStaticQuery } from 'gatsby'
+import Img from 'gatsby-image'
 
 const Container = styled.div`
     height: 32.5em;
@@ -89,7 +87,7 @@ const StyledTitle = styled.div`
 
 /* “All base UI element */
 
-    position: absolute;
+    position: relative;
 
     font-family: Messina Sans bold;
     font-style: normal;
@@ -128,10 +126,11 @@ const StyledMoreabout = styled.button`
     font-size: 1em;
     line-height: 1.5em;
     /* or 150% */
+    position: relative;
     display: flex;
     align-items: center;
     //letter-spacing:  0.01825em;
-    margin-top: 7.475em;
+    margin-top: 0.9375rem;
 
     /* Link */
     color: #FFFFFF;
@@ -165,7 +164,7 @@ const StyledMoreabout = styled.button`
     }
     @media (max-width: 991px) {
            margin-left: 1.125rem; 
-           margin-top: 9.8125rem;
+           margin-top: 0.9375rem;
     }  
 `
 
@@ -180,8 +179,9 @@ const StyledPointer = styled.div`
 `
 
 
-const Styledimg = styled.img`
-    min-width: 30.125rem;
+const Styledimg = styled(Img)`
+        max-width: 30.125rem;
+    max-height: 17.25rem;
     z-index: 2;
     position: absolute;
     @media (min-width: 992px) and (max-width: 1439px) {
@@ -234,9 +234,11 @@ const StyledCircle = styled.img`
     } 
 `
 
-const StyledDesktopimg = styled.img`
+const StyledDesktopimg = styled(Img)`
     z-index: 2;
     position: absolute;
+    max-width: 30.125rem;
+    max-height: 17.25rem;
     @media (min-width: 991px) {
         display: none;
     
@@ -258,6 +260,40 @@ const StyledDesktopimg = styled.img`
 
 
 export const FirstSlide = ({title, description, image}) => {
+    const data = useStaticQuery(graphql`
+    query {
+        allStrapiCarousel {
+            edges {
+              node {
+                picture {
+                  localFile {
+                    id
+                    childImageSharp {
+                      fluid (quality: 100) {
+                        ...GatsbyImageSharpFluid
+                      }
+                    }
+                  }
+                }
+                id
+                content
+              }
+            }
+          }
+    }
+    `)
+
+    const ImageQuery1 = data.allStrapiCarousel.edges.map(document=>document.node.id === "Carousel_1" ? document.node.picture.localFile.childImageSharp.fluid : null)
+    const FilterQuery1 = ImageQuery1.filter(document=>document !== null ? document : null )
+
+    const ImageQuery2 = data.allStrapiCarousel.edges.map(document=>document.node.id === "Carousel_2" ? document.node.picture.localFile.childImageSharp.fluid : null)
+    const FilterQuery2 = ImageQuery2.filter(document=>document !== null ? document : null )
+
+    const ImageQuery3 = data.allStrapiCarousel.edges.map(document=>document.node.id === "Carousel_3" ? document.node.picture.localFile.childImageSharp.fluid : null)
+    const FilterQuery3 = ImageQuery3.filter(document=>document !== null ? document : null )
+    
+    const ImageQuery4 = data.allStrapiCarousel.edges.map(document=>document.node.id === "Carousel_4" ? document.node.picture.localFile.childImageSharp.fluid : null)
+    const FilterQuery4 = ImageQuery4.filter(document=>document !== null ? document : null )
     
     return (
         <>
@@ -268,8 +304,8 @@ export const FirstSlide = ({title, description, image}) => {
             <StyledCircle src={circleslide} />
             <StyledGroupElements src={group} />
                 <ImageContainer lg={7} xl>
-                    <Styledimg src={image == 'first' ? first : second} />
-                    <StyledDesktopimg src={image == 'first' ? firstdesktop : seconddesktop} />
+                    <Styledimg  fluid={image == 'first' ? FilterQuery1 : FilterQuery2 } />
+                    <StyledDesktopimg fluid={image == 'first' ? FilterQuery3 : FilterQuery4} />
                 </ImageContainer>
                 <TextContainer>
                     <StyledSlogan>

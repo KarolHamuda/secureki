@@ -123,7 +123,7 @@ const StyledRow = styled(Row)`
 const StyledButtonRow = styled(Row)`
     margin-left: auto;
     margin-right: auto;
-    max-width: 20.5375rem;
+    max-width: 24.5375rem;
     white-space: nowrap;
     @media (max-width: 991px) {
         margin-top: 0;

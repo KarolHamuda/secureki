@@ -1,10 +1,8 @@
 import React from 'react'
-import { StackedPictures } from '../body/StackedPictures'
 import styled from 'styled-components'
 import { Col, Row } from "react-bootstrap"
 import pictures from '../../assets/about/culture/Group 603.png'
 import test from '../../assets/about/culture/test.png'
-
 import { graphql, useStaticQuery } from 'gatsby'
 
 const Container = styled.div`
@@ -162,7 +160,7 @@ const Styledsvg = styled.img`
         max-width: 34.125em;
         @media (min-width: 992px) and (max-width: 1439px) {
         max-width: 34em;
-        margin-left: -1rem;
+        margin-left: -3rem;
         margin-top: 6.5rem;
     }
 `

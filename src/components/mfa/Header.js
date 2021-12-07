@@ -1,15 +1,12 @@
 import React from 'react'
-
 import styled from 'styled-components'
 import { Row, Col } from 'react-bootstrap'
-import Header from '../../assets/mfa/header.png'
 import StyledButton from '../navbar/Button.js'
 import checkpoint from '../../assets/mfa/checkpoint.svg'
-
 import circle from "../../assets/decorations/circle.svg"
 import smallcircle from "../../assets/decorations/smallcircle.svg"
-
 import { graphql, useStaticQuery } from 'gatsby'
+import Img from 'gatsby-image'
 
 
 const Layout = styled.div`
@@ -105,7 +102,7 @@ const StyledImageContainer = styled(Col)`
     padding: 0;
 `
 
-const StyledImage = styled.img`
+const StyledImage = styled(Img)`
     margin-top: 14.1125em;
     margin-left: 4rem;
     margin-bottom: 0;
@@ -236,13 +233,22 @@ export const MFAHeader = () => {
     const data = useStaticQuery(graphql`
     query {
         allStrapiMfa {
-        edges {
-            node {
-            id
-            content
-            title
-            }
-        }
+            edges {
+                node {
+                  picture {
+                    localFile {
+                      id
+                      childImageSharp {
+                        fluid (quality: 100) {
+                          ...GatsbyImageSharpFluid
+                        }
+                      }
+                    }
+                  }
+                  id
+                  content
+                }
+              }
         }
         allStrapiButtons {
             edges {
@@ -254,6 +260,10 @@ export const MFAHeader = () => {
           }
     }
     `)
+
+    const ImageQuery = data.allStrapiMfa.edges.map(document=>document.node.id === "Mfa_1" ? document.node.picture.localFile.childImageSharp.fluid : null)
+    const FilterQuery = ImageQuery.filter(document=>document !== null ? document : null )
+
 return (
     <Layout>
         <StyledCircle src={circle} />
@@ -294,7 +304,7 @@ return (
             
             </StyledText>
             <StyledImageContainer xs={{order: 1}} lg={{order: 2}}>
-                <StyledImage src={Header}/>
+                <StyledImage fluid={FilterQuery}/>
             </StyledImageContainer>
         </FixedRow>
     </Layout>

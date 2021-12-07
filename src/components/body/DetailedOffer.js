@@ -1,7 +1,6 @@
 import React from 'react';
 import { Row, Col } from 'react-bootstrap';
 import styled from 'styled-components';
-import pierwszy from "../../assets/pierwszy.png"
 import { Link, graphql, useStaticQuery } from 'gatsby'
 import Img from 'gatsby-image'
 

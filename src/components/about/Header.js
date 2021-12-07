@@ -1,16 +1,10 @@
 import * as React from "react";
 import styled from 'styled-components'
 import { Row, Col } from 'react-bootstrap'
-import Header from '../../assets/pam/header.png'
 import StyledButton from '../navbar/Button.js'
 import checkpoint from '../../assets/mfa/checkpoint.svg'
-
-import image from '../../assets/about/header/image.png'
-import mobile from '../../assets/about/header/about-header-mobile.png'
 import elementsgroup from '../../assets/about/header/elementsgroup.svg'
 import rec from '../../assets/about/header/rec.svg'
-import Media from 'react-media';
-
 import { graphql, useStaticQuery } from 'gatsby'
 import Img from 'gatsby-image'
 
@@ -159,6 +153,18 @@ const StyledImage = styled(Img)`
     margin-top: 8.1563rem;
     margin-left: 10.4375rem;
     @media (max-width: 991px) {
+        display: none;
+    } 
+    @media (min-width: 992px) and (max-width: 1439px) {
+        margin-left: 0;
+        width: auto;
+        position: relative;
+    }
+`
+
+const StyledMobileImage = styled(Img)`
+    display: none;
+    @media (max-width: 991px) {
         margin:0;
         margin-top: 8rem;
         margin-left: -3.6875rem;
@@ -170,7 +176,7 @@ const StyledImage = styled(Img)`
         margin-left: 0;
         width: auto;
         position: relative;
-    }
+}
 `
 
 const StyledElements = styled.img`
@@ -277,17 +283,10 @@ return (
                 </ButtonContainer>
                 
                 </Container>
-                <Media queries={{
-                    small: "(max-width: 991px)",
-                    large: "(min-width: 961px)"
-                }}>
-                    {matches => (
-                        <>
-                        {matches.large && <Wrapper><StyledImage fluid={FilterQuery} /></Wrapper> }
-                        {matches.small && <Wrapper><StyledImage fluid={FilterQuery2} /></Wrapper> }
-                        </>
-                    )}
-                </Media>
+                
+                        <Wrapper><StyledImage fluid={FilterQuery} /></Wrapper>
+                        <Wrapper><StyledMobileImage fluid={FilterQuery2} /></Wrapper>
+                     
                   
                 <StyledElements src={elementsgroup} /> 
                 <StyledRec src={rec} />

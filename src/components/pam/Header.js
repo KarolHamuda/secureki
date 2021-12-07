@@ -1,20 +1,17 @@
 import React from 'react'
-
 import styled from 'styled-components'
 import { Row, Col } from 'react-bootstrap'
-import Header from '../../assets/pam/header.png'
 import StyledButton from '../navbar/Button.js'
 import checkpoint from '../../assets/mfa/checkpoint.svg'
-
 import circle from "../../assets/decorations/circle.svg"
 import smallcircle from "../../assets/decorations/smallcircle.svg"
-
 import rec from "../../assets/pam/header/rec.svg"
 import siderec from "../../assets/pam/header/siderec.svg"
 import emptyrec from "../../assets/pam/header/emptyrec.svg"
 import sidesmallrec from "../../assets/pam/header/sidesmallrec.svg"
 
 import { graphql, useStaticQuery } from 'gatsby'
+import Img from 'gatsby-image'
 
 
 const Layout = styled.div`
@@ -150,7 +147,7 @@ const StyledImageContainer = styled(Col)`
 `
  
 
-const StyledImage = styled.img`
+const StyledImage = styled(Img)`
     margin-top: 12.6875em;
     margin-right: 0;
     margin-bottom: 0;
@@ -306,13 +303,23 @@ export const PAMHeader = () => {
     const data = useStaticQuery(graphql`
     query {
         allStrapiPam {
-        edges {
-            node {
-            id
-            content
-            title
-            }
-        }
+            edges {
+                node {
+                  picture {
+                    localFile {
+                      id
+                      childImageSharp {
+                        fluid (quality: 100) {
+                          ...GatsbyImageSharpFluid
+                        }
+                      }
+                    }
+                  }
+                  id
+                  content
+                  title
+                }
+              }
         }
         allStrapiButtons {
             edges {
@@ -324,6 +331,10 @@ export const PAMHeader = () => {
           }
     }
     `)
+
+    const ImageQuery = data.allStrapiPam.edges.map(document=>document.node.id === "Pam_1" ? document.node.picture.localFile.childImageSharp.fluid : null)
+    const FilterQuery = ImageQuery.filter(document=>document !== null ? document : null )
+
 return (
     <Layout>
         <StyledRec src={rec} />
@@ -367,7 +378,7 @@ return (
             </StyledText>
             <StyledImageContainer xs={{order: 1}} lg={{order: 2}}>
                 
-                    <StyledImage src={Header}/>
+                    <StyledImage fluid={FilterQuery}/>
                 
             </StyledImageContainer>
         </FixedRow>

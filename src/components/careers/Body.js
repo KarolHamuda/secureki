@@ -1,10 +1,10 @@
 import React from 'react';
 import { Row, Col } from 'react-bootstrap';
 import styled from 'styled-components';
-import drugi from "../../assets/careers/body/image 10.png"
-
 import emptyrec from "../../assets/careers/body/emptyrec.svg"
 import whiterec from "../../assets/careers/body/whiterec.svg"
+import { graphql, useStaticQuery } from 'gatsby'
+import Img from 'gatsby-image'
 
 const EmptyRec = styled.img`
     position: absolute;
@@ -181,7 +181,7 @@ const StyledContent = styled.div`
 `
 
 
-const Styledimg = styled.img`
+const Styledimg = styled(Img)`
     min-width: 36rem;
     max-width: 36rem;
     max-height: 24.125rem;
@@ -219,6 +219,32 @@ const Wrapper = styled.div`
 `
 
 export const Body = () => {
+    const data = useStaticQuery(graphql`
+    query {
+        allStrapiCareer {
+            edges {
+              node {
+                picture {
+                  localFile {
+                    id
+                    childImageSharp {
+                      fluid (quality: 100) {
+                        ...GatsbyImageSharpFluid
+                      }
+                    }
+                  }
+                }
+                id
+                content
+              }
+            }
+          }
+    }
+    `)
+
+    const ImageQuery = data.allStrapiCareer.edges.map(document=>document.node.id === "Career_1" ? document.node.picture.localFile.childImageSharp.fluid : null)
+    const FilterQuery = ImageQuery.filter(document=>document !== null ? document : null )
+
     return (
   
         <Container>
@@ -237,7 +263,7 @@ export const Body = () => {
                     
                 </TextContainer>
                 <ImageContainer xs={5}>
-                    <Wrapper><Styledimg src={drugi} /></Wrapper>
+                    <Wrapper><Styledimg fluid={FilterQuery} /></Wrapper>
                 </ImageContainer>
 
                 <WhiteRec src={whiterec} />

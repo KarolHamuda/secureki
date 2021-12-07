@@ -61,7 +61,7 @@ const StyledButton = styled(Button)`
     border: 2px solid #FF6938;
     
   
-    margin-left: 61.625rem;
+    margin-left: 58.625rem;
     margin-top: 3.8125rem;
     padding: 0.5687em 1.425em 0.5687em 1.425em;
     font-family: Messina Sans bold;
@@ -75,12 +75,12 @@ const StyledButton = styled(Button)`
     }
     @media (max-width: 991px) {
         margin: 0;
-        margin-left: 2rem;
+        margin-left: 1rem;
         margin-right: 0;
         margin-top: 3.3125rem;
     } 
     @media (min-width: 992px) and (max-width: 1439px) {
-        margin-left: 66vw;
+        margin-left: 60vw;
     } 
 `
 
@@ -99,7 +99,7 @@ const StyledSecondButton = styled(Button)`
     @media (max-width: 991px) {
         margin: 0;
         margin-top: 3.3125rem;
-        margin-left: 11.5rem;
+        margin-left: 13.5rem;
         
         text-align: center;
         justify-content: center;
@@ -213,7 +213,7 @@ export const Join = () => {
                         </StyledButton>
                         <Link to='./careers'> 
                         <StyledSecondButton background="#FF6938" font="#FFFFFF">
-                        {data.allStrapiButtons.edges.map(document=>document.node.id === "Buttons_9" ? document.node.title :  null)}
+                            {data.allStrapiButtons.edges.map(document=>document.node.id === "Buttons_9" ? document.node.title :  null)}
                         </StyledSecondButton>
                         </Link>
                     </StyledButtonCol>

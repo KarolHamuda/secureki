@@ -1,11 +1,11 @@
 import React from 'react';
 import { Row, Col } from 'react-bootstrap';
 import styled from 'styled-components';
-import drugi from "../../assets/mfa/offer-1.png"
 import chart from "../../assets/mfa/chart.svg"
 import Media from 'react-media'
 
 import { graphql, useStaticQuery } from 'gatsby'
+import Img from 'gatsby-image'
 
 const Container = styled.div`
     height: 48.6875em;
@@ -189,7 +189,7 @@ const StyledPointer = styled.div`
     } 
 `
 
-const Styledimg = styled.img`
+const Styledimg = styled(Img)`
     max-width: 32.125em;
     margin-top: 6rem;
     margin-left: 2.5rem;
@@ -343,16 +343,29 @@ export const ChartOffer = () => {
     const data = useStaticQuery(graphql`
     query {
         allStrapiMfa {
-        edges {
-            node {
-            id
-            content
-            title
+            edges {
+              node {
+                picture {
+                  localFile {
+                    id
+                    childImageSharp {
+                      fluid (quality: 100) {
+                        ...GatsbyImageSharpFluid
+                      }
+                    }
+                  }
+                }
+                id
+                content
+              }
             }
-        }
-        }
+          }
     }
     `)
+
+    const ImageQuery = data.allStrapiMfa.edges.map(document=>document.node.id === "Mfa_2" ? document.node.picture.localFile.childImageSharp.fluid : null)
+    const FilterQuery = ImageQuery.filter(document=>document !== null ? document : null )
+
     return (
         <div style={{background: "#FCF5F0"}}>
         <Container>
@@ -364,7 +377,7 @@ export const ChartOffer = () => {
                         }}>
                             {matches => (
                                 <>
-                                {matches.large && <Styledimg src={drugi} /> }
+                                {matches.large && <Styledimg fluid={FilterQuery} /> }
                                 {matches.small && 
                                 <NoMarginRow xs={1} lg={3}>
                                         <NoMarginRow>
@@ -415,7 +428,7 @@ export const ChartOffer = () => {
                         }}>
                             {matches => (
                                 <>
-                                {matches.small && <Wrapper><Styledimg src={drugi} /></Wrapper> }
+                                {matches.small && <Wrapper><Styledimg fluid={FilterQuery} /></Wrapper> }
                                 {matches.large && 
                                 <NoMarginRow>
                                         <NoMarginRow>

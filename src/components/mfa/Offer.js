@@ -1,12 +1,9 @@
 import React from 'react';
 import { Row, Col } from 'react-bootstrap';
 import styled from 'styled-components';
-import pierwszy from "../../assets/pierwszy.png"
-import image from "../../assets/mfa/offer-2.png"
 import dot from "../../assets/mfa/dot.svg"
-
 import { graphql, useStaticQuery } from 'gatsby'
-
+import Img from 'gatsby-image'
 
 const Container = styled.div`
     height: 51em;
@@ -180,7 +177,7 @@ const StyledPointer = styled.div`
     }
 `
 
-const Styledimg = styled.img`
+const Styledimg = styled(Img)`
     min-width: 35.375em;
     max-width: 35.375rem;
     margin-left: -4.95rem;
@@ -245,16 +242,29 @@ export const Offer = () => {
     const data = useStaticQuery(graphql`
     query {
         allStrapiMfa {
-        edges {
-            node {
-            id
-            content
-            title
+            edges {
+              node {
+                picture {
+                  localFile {
+                    id
+                    childImageSharp {
+                      fluid (quality: 100) {
+                        ...GatsbyImageSharpFluid
+                      }
+                    }
+                  }
+                }
+                id
+                content
+              }
             }
-        }
-        }
+          }
     }
     `)
+
+    const ImageQuery = data.allStrapiMfa.edges.map(document=>document.node.id === "Mfa_3" ? document.node.picture.localFile.childImageSharp.fluid : null)
+    const FilterQuery = ImageQuery.filter(document=>document !== null ? document : null )
+
     return (
         <div style={{background: "#FCF5F0"}}>
         <Container>
@@ -284,7 +294,7 @@ export const Offer = () => {
                     
                 </TextContainer>
                 <ImageContainer >
-                    <Styledimg src={image} />
+                    <Styledimg fluid={FilterQuery} />
                 </ImageContainer>
 
             </StyledRow>

@@ -1,11 +1,10 @@
 import React from 'react';
 import { Row, Col } from 'react-bootstrap';
 import styled from 'styled-components';
-import drugi from "../../assets/mfa/offer-3.png";
 import circle from "../../assets/decorations/circle.svg";
 import smallcircle from "../../assets/decorations/smallcircle.svg";
-
 import { graphql, useStaticQuery } from 'gatsby'
+import Img from 'gatsby-image'
 
 const Container = styled.div`
     height: 37.8125em;
@@ -200,7 +199,7 @@ const StyledPointer = styled.div`
     } 
 `
 
-const Styledimg = styled.img`
+const Styledimg = styled(Img)`
     min-width: 28em;
     @media (max-width: 991px) {
         min-width: 21.25rem;
@@ -220,16 +219,29 @@ export const LastOffer = () => {
     const data = useStaticQuery(graphql`
     query {
         allStrapiMfa {
-        edges {
-            node {
-            id
-            content
-            title
+            edges {
+              node {
+                picture {
+                  localFile {
+                    id
+                    childImageSharp {
+                      fluid (quality: 100) {
+                        ...GatsbyImageSharpFluid
+                      }
+                    }
+                  }
+                }
+                id
+                content
+              }
             }
-        }
-        }
+          }
     }
     `)
+
+    const ImageQuery = data.allStrapiMfa.edges.map(document=>document.node.id === "Mfa_4" ? document.node.picture.localFile.childImageSharp.fluid : null)
+    const FilterQuery = ImageQuery.filter(document=>document !== null ? document : null )
+
     return (
         <div style={{background: "#FFFFFF"}}>
         <Container>
@@ -237,7 +249,7 @@ export const LastOffer = () => {
         <StyledSmallTwoCircle src={smallcircle} />
             <StyledRow>
                 <ImageContainer xs={5.5} xs={{order: 2}} lg={{order: 1}}>
-                    <Styledimg src={drugi} />
+                    <Styledimg fluid={FilterQuery} />
                 </ImageContainer>
                 <TextContainer lg={{order: 2}}>
                     <StyledSlogan>

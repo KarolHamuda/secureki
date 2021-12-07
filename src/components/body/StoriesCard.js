@@ -1,12 +1,8 @@
 import React from 'react'
 import styled from 'styled-components'
 import { Row, Col } from 'react-bootstrap'
-
-
-import first from '../../assets/customerstories/Lee Kok Seong (Takaful Ikhlas CIO).png'
-import second from '../../assets/customerstories/Chia Nam Liang (Hap Seng CIO).png'
-
-import third from '../../assets/customerstories/Beh Swan Swan (Magnum CIO).png'
+import { graphql, useStaticQuery } from 'gatsby'
+import Img from 'gatsby-image'
 
 const Container = styled.div`
     width: 22.0625rem;
@@ -63,7 +59,8 @@ const TextContainer = styled(Row)`
     } 
 `
 
-const ImageContainer = styled.img`
+const ImageContainer = styled(Img)`
+    max-width: 4.0625rem;
     border-radius: 50%;
     margin-left: 2.0625em;
     margin-bottom: 2.4375em;
@@ -113,6 +110,37 @@ const JobContainer = styled(Row)`
 
 
 const StoriesCard = ({story, image, title, position}) => {
+    const data = useStaticQuery(graphql`
+    query {
+        allStrapiArticle {
+            edges {
+              node {
+                picture {
+                  localFile {
+                    id
+                    childImageSharp {
+                      fluid (quality: 100) {
+                        ...GatsbyImageSharpFluid
+                      }
+                    }
+                  }
+                }
+                id
+                content
+              }
+            }
+          }
+    }
+    `)
+
+    const ImageQuery1 = data.allStrapiArticle.edges.map(document=>document.node.id === "Article_1" ? document.node.picture.localFile.childImageSharp.fluid : null)
+    const FilterQuery1 = ImageQuery1.filter(document=>document !== null ? document : null )
+
+    const ImageQuery2 = data.allStrapiArticle.edges.map(document=>document.node.id === "Article_2" ? document.node.picture.localFile.childImageSharp.fluid : null)
+    const FilterQuery2 = ImageQuery2.filter(document=>document !== null ? document : null )
+
+    const ImageQuery3 = data.allStrapiArticle.edges.map(document=>document.node.id === "Article_3" ? document.node.picture.localFile.childImageSharp.fluid : null)
+    const FilterQuery3 = ImageQuery3.filter(document=>document !== null ? document : null )
     return (
         <Container>
                 <TextContainer>
@@ -120,7 +148,11 @@ const StoriesCard = ({story, image, title, position}) => {
                 </TextContainer>
             <Row style={{margin: 0}}>
                 <Col xs={4} style={{padding: 0}}>
-                    {image === "andrea" ? <ImageContainer src={first} /> : image === "ketut" ? <ImageContainer src={second} /> : <ImageContainer src={third} />}                    
+                    {image === "andrea" ? 
+                    <ImageContainer fluid={FilterQuery1} /> : 
+                    image === "ketut" ? 
+                    <ImageContainer fluid={FilterQuery2} /> : 
+                    <ImageContainer fluid={FilterQuery3} />}                    
                 </Col>
                 <Col>
                     <TitleContainer>

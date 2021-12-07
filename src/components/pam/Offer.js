@@ -1,10 +1,10 @@
 import React from 'react';
 import { Row, Col } from 'react-bootstrap';
 import styled from 'styled-components';
-import drugi from "../../assets/pam/offer-1.png"
 import Media from 'react-media'
 
 import { graphql, useStaticQuery } from 'gatsby'
+import Img from 'gatsby-image'
 
 const Container = styled.div`
     height: 45.5em;
@@ -167,7 +167,7 @@ const StyledPointer = styled.div`
     color: #FF6938;
 `
 
-const Styledimg = styled.img`
+const Styledimg = styled(Img)`
     max-width: 37.6875em;
     margin-left: 6.9rem;
     @media (min-width: 992px) and (max-width: 1439px) {
@@ -187,22 +187,35 @@ export const Offer = () => {
     const data = useStaticQuery(graphql`
     query {
         allStrapiPam {
-        edges {
-            node {
-            id
-            content
-            title
-            }
-        }
+            edges {
+                node {
+                  picture {
+                    localFile {
+                      id
+                      childImageSharp {
+                        fluid (quality: 100) {
+                          ...GatsbyImageSharpFluid
+                        }
+                      }
+                    }
+                  }
+                  id
+                  content
+                }
+              }
         }
     }
     `)
+
+    const ImageQuery = data.allStrapiPam.edges.map(document=>document.node.id === "Pam_2" ? document.node.picture.localFile.childImageSharp.fluid : null)
+    const FilterQuery = ImageQuery.filter(document=>document !== null ? document : null )
+
     return (
         <div style={{background: "#FCF5F0"}}>
         <Container>
             <StyledRow>
                 <ImageContainer xs={{ order: 2 }} lg={{ order: 1 }}>
-                    <Styledimg src={drugi} />
+                    <Styledimg fluid={FilterQuery} />
                 </ImageContainer>
                 <TextContainer xs={{ order: 1 }} lg={{ order: 2 }}>
                     <StyledSlogan>
