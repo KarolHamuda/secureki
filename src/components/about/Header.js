@@ -165,11 +165,14 @@ const StyledImage = styled(Img)`
 const StyledMobileImage = styled(Img)`
     display: none;
     @media (max-width: 991px) {
+        display: block;
         margin:0;
-        margin-top: 8rem;
+        margin-top: 7.5rem;
         margin-left: -3.6875rem;
         min-width: 27.875rem;
         max-width: 27.875rem;
+        max-height: 27.875rem;
+        min-height: 27.875rem;
         position: relative;
     } 
     @media (min-width: 992px) and (max-width: 1439px) {
@@ -195,6 +198,7 @@ const StyledRec = styled.img`
     margin-top: 5rem;
     margin-left: 6rem;
     @media (max-width: 991px) {
+        display: none;
         position: absolute;
         margin-top: -24rem;
         margin-left: -3rem;

@@ -22,7 +22,8 @@ const Container = styled.div`
     }
     @media (max-width: 991px) {
         max-width: 23.4375rem;
-        height: 52.8125rem;
+        height: 48.8125rem;
+        padding-bottom: 0;
     } 
 `
 const TextContainer = styled(Col)`
@@ -178,6 +179,7 @@ const Styledimg = styled(Img)`
     }
     @media (max-width: 991px) {
         max-width: 22.125rem;
+        min-width: 22.125rem;
         margin-left: 1rem;
         
     } 

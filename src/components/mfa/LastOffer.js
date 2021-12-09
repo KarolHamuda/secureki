@@ -22,7 +22,8 @@ const Container = styled.div`
     }
     @media (max-width: 991px) {
         max-width: 23.4375rem;
-        height: 46.3125rem;
+        height: 37.3125rem;
+        padding-bottom: 0;
     } 
 `
 const TextContainer = styled(Col)`

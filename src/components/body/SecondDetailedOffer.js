@@ -2,7 +2,7 @@ import React from 'react';
 import { Row, Col } from 'react-bootstrap';
 import styled from 'styled-components';
 import { Link, graphql, useStaticQuery } from 'gatsby'
-import Img from 'gatsby-image'
+import { GatsbyImage } from 'gatsby-plugin-image'
 
 const Container = styled.div`
     height: 45.5em;
@@ -196,8 +196,9 @@ const StyledPointer = styled.div`
     color: #FF6938;
 `
 
-const Styledimg = styled(Img)`
+const Styledimg = styled(GatsbyImage)`
     max-width: 30.125em;
+    max-height: 25.625rem;
     margin-top: 7rem;
     margin-left: 6.5rem;
     @media (min-width: 992px) and (max-width: 1439px) {
@@ -236,11 +237,8 @@ export const SecondDetailedOffer = () => {
               node {
                 picture {
                   localFile {
-                    id
                     childImageSharp {
-                      fluid (quality: 100) {
-                        ...GatsbyImageSharpFluid
-                      }
+                      gatsbyImageData(layout: FIXED)
                     }
                   }
                 }
@@ -252,8 +250,9 @@ export const SecondDetailedOffer = () => {
     }
     `)
 
-    const ImageQuery = data.allStrapiArticle.edges.map(document=>document.node.id === "Article_9" ? document.node.picture.localFile.childImageSharp.fluid : null)
+    const ImageQuery = data.allStrapiArticle.edges.map(document=>document.node.id === "Article_9" ? document.node.picture.localFile.childImageSharp : null)
     const FilterQuery = ImageQuery.filter(document=>document !== null ? document : null )
+    const Image = FilterQuery[0].gatsbyImageData
 
     return (
         <div style={{background: "#FCF5F0"}}>
@@ -261,7 +260,7 @@ export const SecondDetailedOffer = () => {
 
             <StyledRow xs={1} lg={2}>
                 <ImageContainer xs={{ order: 2 }} lg={{ order: 1 }} lg={6} xl>
-                    <Styledimg fluid={FilterQuery} />
+                    <Styledimg image={Image} />
                 </ImageContainer>
                 <TextContainer lg={{ order: 2 }}>
                     <StyledSlogan>

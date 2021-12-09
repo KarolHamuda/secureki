@@ -75,7 +75,7 @@ const StyledButton = styled(Button)`
     @media (max-width: 991px) {
         margin-top: 0;
         margin-bottom: 0;
-        margin-left: 10em;
+        margin-left: 9em;
     } 
 `
 
@@ -101,6 +101,7 @@ const StyledSecondButton = styled(Button)`
 const StyledCol = styled(Col)`
     justify-content: center;
     display: flex;
+    padding-left: 0.625rem;
     @media (max-width: 991px) {
         align-content: space-between;
         justify-content: space-between;

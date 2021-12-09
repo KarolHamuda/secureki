@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import emptyrec from "../../assets/careers/body/emptyrec.svg"
 import whiterec from "../../assets/careers/body/whiterec.svg"
 import { graphql, useStaticQuery } from 'gatsby'
-import Img from 'gatsby-image'
+import { GatsbyImage } from 'gatsby-plugin-image'
 
 const EmptyRec = styled.img`
     position: absolute;
@@ -181,7 +181,7 @@ const StyledContent = styled.div`
 `
 
 
-const Styledimg = styled(Img)`
+const Styledimg = styled(GatsbyImage)`
     min-width: 36rem;
     max-width: 36rem;
     max-height: 24.125rem;
@@ -226,11 +226,8 @@ export const Body = () => {
               node {
                 picture {
                   localFile {
-                    id
                     childImageSharp {
-                      fluid (quality: 100) {
-                        ...GatsbyImageSharpFluid
-                      }
+                      gatsbyImageData(layout: FIXED)
                     }
                   }
                 }
@@ -242,8 +239,9 @@ export const Body = () => {
     }
     `)
 
-    const ImageQuery = data.allStrapiCareer.edges.map(document=>document.node.id === "Career_1" ? document.node.picture.localFile.childImageSharp.fluid : null)
+    const ImageQuery = data.allStrapiCareer.edges.map(document=>document.node.id === "Career_1" ? document.node.picture.localFile.childImageSharp : null)
     const FilterQuery = ImageQuery.filter(document=>document !== null ? document : null )
+    const Image = FilterQuery[0].gatsbyImageData
 
     return (
   
@@ -263,7 +261,7 @@ export const Body = () => {
                     
                 </TextContainer>
                 <ImageContainer xs={5}>
-                    <Wrapper><Styledimg fluid={FilterQuery} /></Wrapper>
+                    <Wrapper><Styledimg image={Image} /></Wrapper>
                 </ImageContainer>
 
                 <WhiteRec src={whiterec} />

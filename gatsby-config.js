@@ -1,7 +1,6 @@
 const path = require(`path`)
 
 module.exports = {
-  pathPrefix: `/site`,
   siteMetadata: {
     title: `SecureKi`,
     description: `The automation in SecureKi can save you time and double your revenue.`,

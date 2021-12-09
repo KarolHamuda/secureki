@@ -8,9 +8,10 @@ import circle from "../../assets/decorations/circle.svg"
 import smallcircle from "../../assets/decorations/smallcircle.svg"
 import { graphql, useStaticQuery } from 'gatsby'
 import Img from 'gatsby-image'
+import { GatsbyImage } from 'gatsby-plugin-image'
 
 
-const StyledImage = styled(Img)`
+const StyledImage = styled(GatsbyImage)`
     border-radius: 0;
     margin-bottom: 0;
     min-width: 42.875em;
@@ -29,6 +30,8 @@ const StyledImage = styled(Img)`
         max-width: 21.4375rem;
         margin-top: 7.1875rem;
         min-width: 21.4375rem;
+        max-height: 19.25rem;
+        min-height: 19.25rem;
     } 
     
 `
@@ -236,36 +239,38 @@ export const Article = () => {
     const data = useStaticQuery(graphql`
     query {
         allStrapiArticle {
-            edges {
-              node {
-                picture {
-                  localFile {
-                    id
-                    childImageSharp {
-                      fluid (quality: 100) {
-                        ...GatsbyImageSharpFluid
-                      }
-                    }
+          edges {
+            node {
+              picture {
+                localFile {
+                  childImageSharp {
+                    gatsbyImageData(layout: FIXED)
                   }
                 }
-                id
-                content
               }
+              id
+              content
             }
           }
-          allStrapiButtons {
-            edges {
-              node {
-                id
-                title
-              }
+        }
+        allStrapiButtons {
+          edges {
+            node {
+              id
+              title
             }
           }
-    }
+        }
+      }
     `)
 
-    const ImageQuery = data.allStrapiArticle.edges.map(document=>document.node.id === "Article_7" ? document.node.picture.localFile.childImageSharp.fluid : null)
+    
+
+    const ImageQuery = data.allStrapiArticle.edges.map(document=>document.node.id === "Article_7" ? document.node.picture.localFile.childImageSharp : null)
+    
     const FilterQuery = ImageQuery.filter(document=>document !== null ? document : null )
+    const Image = FilterQuery[0].gatsbyImageData
+    
 
     return (
         <StyledContent>
@@ -308,7 +313,7 @@ export const Article = () => {
             </>
 
             <FixedCol>
-                <StyledImage fluid={FilterQuery}/>
+                <StyledImage image={Image}/>
             </FixedCol>
         </FixedRow>   
         </StyledContent>

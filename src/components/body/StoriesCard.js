@@ -2,7 +2,7 @@ import React from 'react'
 import styled from 'styled-components'
 import { Row, Col } from 'react-bootstrap'
 import { graphql, useStaticQuery } from 'gatsby'
-import Img from 'gatsby-image'
+import { GatsbyImage } from 'gatsby-plugin-image'
 
 const Container = styled.div`
     width: 22.0625rem;
@@ -59,7 +59,7 @@ const TextContainer = styled(Row)`
     } 
 `
 
-const ImageContainer = styled(Img)`
+const ImageContainer = styled(GatsbyImage)`
     max-width: 4.0625rem;
     border-radius: 50%;
     margin-left: 2.0625em;
@@ -117,11 +117,8 @@ const StoriesCard = ({story, image, title, position}) => {
               node {
                 picture {
                   localFile {
-                    id
                     childImageSharp {
-                      fluid (quality: 100) {
-                        ...GatsbyImageSharpFluid
-                      }
+                      gatsbyImageData(layout: FIXED)
                     }
                   }
                 }
@@ -133,14 +130,17 @@ const StoriesCard = ({story, image, title, position}) => {
     }
     `)
 
-    const ImageQuery1 = data.allStrapiArticle.edges.map(document=>document.node.id === "Article_1" ? document.node.picture.localFile.childImageSharp.fluid : null)
+    const ImageQuery1 = data.allStrapiArticle.edges.map(document=>document.node.id === "Article_1" ? document.node.picture.localFile.childImageSharp : null)
     const FilterQuery1 = ImageQuery1.filter(document=>document !== null ? document : null )
+    const Image1 = FilterQuery1[0].gatsbyImageData
 
-    const ImageQuery2 = data.allStrapiArticle.edges.map(document=>document.node.id === "Article_2" ? document.node.picture.localFile.childImageSharp.fluid : null)
+    const ImageQuery2 = data.allStrapiArticle.edges.map(document=>document.node.id === "Article_2" ? document.node.picture.localFile.childImageSharp : null)
     const FilterQuery2 = ImageQuery2.filter(document=>document !== null ? document : null )
+    const Image2 = FilterQuery2[0].gatsbyImageData
 
-    const ImageQuery3 = data.allStrapiArticle.edges.map(document=>document.node.id === "Article_3" ? document.node.picture.localFile.childImageSharp.fluid : null)
+    const ImageQuery3 = data.allStrapiArticle.edges.map(document=>document.node.id === "Article_3" ? document.node.picture.localFile.childImageSharp : null)
     const FilterQuery3 = ImageQuery3.filter(document=>document !== null ? document : null )
+    const Image3 = FilterQuery3[0].gatsbyImageData
     return (
         <Container>
                 <TextContainer>
@@ -149,10 +149,10 @@ const StoriesCard = ({story, image, title, position}) => {
             <Row style={{margin: 0}}>
                 <Col xs={4} style={{padding: 0}}>
                     {image === "andrea" ? 
-                    <ImageContainer fluid={FilterQuery1} /> : 
+                    <ImageContainer image={Image1} /> : 
                     image === "ketut" ? 
-                    <ImageContainer fluid={FilterQuery2} /> : 
-                    <ImageContainer fluid={FilterQuery3} />}                    
+                    <ImageContainer image={Image2} /> : 
+                    <ImageContainer image={Image3} />}                    
                 </Col>
                 <Col>
                     <TitleContainer>

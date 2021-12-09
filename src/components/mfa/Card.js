@@ -2,7 +2,7 @@ import React from 'react'
 import styled from 'styled-components'
 import { Row } from 'react-bootstrap'
 import { graphql, useStaticQuery } from 'gatsby'
-import Img from 'gatsby-image'
+import { GatsbyImage } from 'gatsby-plugin-image'
 
 const Container = styled.div`
     width: 22.0625em;
@@ -27,7 +27,7 @@ const StyledRow = styled(Row)`
 
 
 
-const ImageContainer = styled(Img)`
+const ImageContainer = styled(GatsbyImage)`
     border-radius: 0.8125em;
     border-radius: 0.8125em;
     -moz-border-radius: 0.8125em;
@@ -97,11 +97,8 @@ const Card = ({title, description, link, picture}) => {
               node {
                 picture {
                   localFile {
-                    id
                     childImageSharp {
-                      fluid (quality: 100) {
-                        ...GatsbyImageSharpFluid
-                      }
+                      gatsbyImageData(layout: FIXED)
                     }
                   }
                 }
@@ -113,21 +110,24 @@ const Card = ({title, description, link, picture}) => {
     }
     `)
 
-    const ImageQuery1 = data.allStrapiMfa.edges.map(document=>document.node.id === "Mfa_5" ? document.node.picture.localFile.childImageSharp.fluid : null)
+    const ImageQuery1 = data.allStrapiMfa.edges.map(document=>document.node.id === "Mfa_5" ? document.node.picture.localFile.childImageSharp : null)
     const FilterQuery1 = ImageQuery1.filter(document=>document !== null ? document : null )
+    const Image1 = FilterQuery1[0].gatsbyImageData
 
-    const ImageQuery2 = data.allStrapiMfa.edges.map(document=>document.node.id === "Mfa_6" ? document.node.picture.localFile.childImageSharp.fluid : null)
+    const ImageQuery2 = data.allStrapiMfa.edges.map(document=>document.node.id === "Mfa_6" ? document.node.picture.localFile.childImageSharp : null)
     const FilterQuery2 = ImageQuery2.filter(document=>document !== null ? document : null )
+    const Image2 = FilterQuery2[0].gatsbyImageData
 
-    const ImageQuery3 = data.allStrapiMfa.edges.map(document=>document.node.id === "Mfa_7" ? document.node.picture.localFile.childImageSharp.fluid : null)
+    const ImageQuery3 = data.allStrapiMfa.edges.map(document=>document.node.id === "Mfa_7" ? document.node.picture.localFile.childImageSharp : null)
     const FilterQuery3 = ImageQuery3.filter(document=>document !== null ? document : null )
-    
+    const Image3 = FilterQuery3[0].gatsbyImageData
+
     return (
         <Container>
             <StyledRow>
                 {picture === 'first' ?
-                <ImageContainer fluid={FilterQuery1} /> :
-                picture === 'second' ? <ImageContainer fluid={FilterQuery2} /> : <ImageContainer fluid={FilterQuery3} /> }
+                <ImageContainer image={Image1} /> :
+                picture === 'second' ? <ImageContainer image={Image2} /> : <ImageContainer image={Image3} /> }
                 
             </StyledRow>
             <TitleContainer>

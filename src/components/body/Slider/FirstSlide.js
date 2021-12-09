@@ -5,7 +5,7 @@ import group from "../../../assets/elementsgroup.svg"
 import squareslide from "../../../assets/decorations/squareslide.svg"
 import circleslide from "../../../assets/decorations/circleslide.svg"
 import { graphql, useStaticQuery } from 'gatsby'
-import Img from 'gatsby-image'
+import { GatsbyImage } from 'gatsby-plugin-image'
 
 const Container = styled.div`
     height: 32.5em;
@@ -179,8 +179,10 @@ const StyledPointer = styled.div`
 `
 
 
-const Styledimg = styled(Img)`
-        max-width: 30.125rem;
+const Styledimg = styled(GatsbyImage)`
+    min-width: 30.125rem;
+    min-height: 17.25rem;
+    max-width: 30.125rem;
     max-height: 17.25rem;
     z-index: 2;
     position: absolute;
@@ -234,7 +236,7 @@ const StyledCircle = styled.img`
     } 
 `
 
-const StyledDesktopimg = styled(Img)`
+const StyledDesktopimg = styled(GatsbyImage)`
     z-index: 2;
     position: absolute;
     max-width: 30.125rem;
@@ -267,11 +269,8 @@ export const FirstSlide = ({title, description, image}) => {
               node {
                 picture {
                   localFile {
-                    id
                     childImageSharp {
-                      fluid (quality: 100) {
-                        ...GatsbyImageSharpFluid
-                      }
+                      gatsbyImageData(layout: FIXED)
                     }
                   }
                 }
@@ -283,18 +282,22 @@ export const FirstSlide = ({title, description, image}) => {
     }
     `)
 
-    const ImageQuery1 = data.allStrapiCarousel.edges.map(document=>document.node.id === "Carousel_1" ? document.node.picture.localFile.childImageSharp.fluid : null)
+    const ImageQuery1 = data.allStrapiCarousel.edges.map(document=>document.node.id === "Carousel_1" ? document.node.picture.localFile.childImageSharp : null)
     const FilterQuery1 = ImageQuery1.filter(document=>document !== null ? document : null )
+    const Image1 = FilterQuery1[0].gatsbyImageData
 
-    const ImageQuery2 = data.allStrapiCarousel.edges.map(document=>document.node.id === "Carousel_2" ? document.node.picture.localFile.childImageSharp.fluid : null)
+    const ImageQuery2 = data.allStrapiCarousel.edges.map(document=>document.node.id === "Carousel_2" ? document.node.picture.localFile.childImageSharp : null)
     const FilterQuery2 = ImageQuery2.filter(document=>document !== null ? document : null )
+    const Image2 = FilterQuery2[0].gatsbyImageData
 
-    const ImageQuery3 = data.allStrapiCarousel.edges.map(document=>document.node.id === "Carousel_3" ? document.node.picture.localFile.childImageSharp.fluid : null)
+    const ImageQuery3 = data.allStrapiCarousel.edges.map(document=>document.node.id === "Carousel_3" ? document.node.picture.localFile.childImageSharp : null)
     const FilterQuery3 = ImageQuery3.filter(document=>document !== null ? document : null )
-    
-    const ImageQuery4 = data.allStrapiCarousel.edges.map(document=>document.node.id === "Carousel_4" ? document.node.picture.localFile.childImageSharp.fluid : null)
+    const Image3 = FilterQuery3[0].gatsbyImageData
+
+    const ImageQuery4 = data.allStrapiCarousel.edges.map(document=>document.node.id === "Carousel_4" ? document.node.picture.localFile.childImageSharp : null)
     const FilterQuery4 = ImageQuery4.filter(document=>document !== null ? document : null )
-    
+    const Image4 = FilterQuery4[0].gatsbyImageData
+
     return (
         <>
         <Container>
@@ -304,8 +307,8 @@ export const FirstSlide = ({title, description, image}) => {
             <StyledCircle src={circleslide} />
             <StyledGroupElements src={group} />
                 <ImageContainer lg={7} xl>
-                    <Styledimg  fluid={image == 'first' ? FilterQuery1 : FilterQuery2 } />
-                    <StyledDesktopimg fluid={image == 'first' ? FilterQuery3 : FilterQuery4} />
+                    <Styledimg  image={image == 'first' ? Image1 : Image2 } />
+                    <StyledDesktopimg image={image == 'first' ? Image3 : Image4} />
                 </ImageContainer>
                 <TextContainer>
                     <StyledSlogan>

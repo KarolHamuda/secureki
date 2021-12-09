@@ -2,7 +2,7 @@ import React from 'react';
 import { Row, Col } from 'react-bootstrap';
 import styled from 'styled-components';
 import { Link, graphql, useStaticQuery } from 'gatsby'
-import Img from 'gatsby-image'
+import { GatsbyImage } from 'gatsby-plugin-image'
 
 const Container = styled.div`
     height: 40em;
@@ -51,7 +51,7 @@ const ImageContainer = styled(Col)`
         padding-left: 0;
         display: flex;
         align-items: center;
-        padding-top: 7.4em;
+        padding-top: 2rem;
     }
 
 `
@@ -190,9 +190,10 @@ const StyledPointer = styled.div`
     } 
 `
 
-const Styledimg = styled(Img)`
+const Styledimg = styled(GatsbyImage)`
     
     max-width: 31.25rem;
+    max-height: 26.5625rem;
     margin-bottom: 0;
     @media (max-width: 1439px) {
         margin-left: auto;
@@ -201,7 +202,7 @@ const Styledimg = styled(Img)`
     }
     @media (max-width: 991px) {
         
-        
+        max-height: 22.5rem;
         max-width: 20.35rem;
         margin-left: 1.3rem;
          
@@ -219,11 +220,8 @@ export const DetailedOffer = () => {
               node {
                 picture {
                   localFile {
-                    id
                     childImageSharp {
-                      fluid (quality: 100) {
-                        ...GatsbyImageSharpFluid
-                      }
+                      gatsbyImageData(layout: FIXED)
                     }
                   }
                 }
@@ -235,9 +233,9 @@ export const DetailedOffer = () => {
     }
     `)
 
-    const ImageQuery = data.allStrapiArticle.edges.map(document=>document.node.id === "Article_8" ? document.node.picture.localFile.childImageSharp.fluid : null)
+    const ImageQuery = data.allStrapiArticle.edges.map(document=>document.node.id === "Article_8" ? document.node.picture.localFile.childImageSharp : null)
     const FilterQuery = ImageQuery.filter(document=>document !== null ? document : null )
-
+    const Image = FilterQuery[0].gatsbyImageData
     return (
         <div style={{background: "#FCF5F0"}}>
         <Container>
@@ -265,7 +263,7 @@ export const DetailedOffer = () => {
                     
                 </TextContainer>
                 <ImageContainer>
-                    <Styledimg fluid={FilterQuery} />
+                    <Styledimg image={Image} />
                 </ImageContainer>
 
             </StyledRow>
