@@ -1,9 +1,14 @@
+const path = require(`path`)
+
 module.exports = {
   pathPrefix: `/site`,
   siteMetadata: {
     title: `SecureKi`,
     description: `The automation in SecureKi can save you time and double your revenue.`,
     author: `@KarolHamuda`,
+  },
+  flags: {
+    THE_FLAG: false
   },
   plugins: [
     `gatsby-plugin-gatsby-cloud`,
@@ -22,7 +27,7 @@ module.exports = {
       resolve: `gatsby-source-filesystem`,
       options: {
         name: `images`,
-        path: `${__dirname}/src/assets`,
+        path: path.join(__dirname, `src`, `assets`),
       },
     },
     `gatsby-transformer-sharp`,
