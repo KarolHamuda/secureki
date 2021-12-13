@@ -51,6 +51,7 @@ const SingleOpening = ({section}) => {
                 id
                 content
                 title
+                url
               }
             }
           }
@@ -61,13 +62,13 @@ const SingleOpening = ({section}) => {
             <StyledTitle>
                 {section}
             </StyledTitle>
-            <Job position={data.allStrapiSecondJob.edges.map(document=>document.node.id === "Second-job_1" ? document.node.title :  null)} location={data.allStrapiSecondJob.edges.map(document=>document.node.id === "Second-job_1" ? document.node.content :  null)} />
-            <Job position={data.allStrapiSecondJob.edges.map(document=>document.node.id === "Second-job_2" ? document.node.title :  null)} location={data.allStrapiSecondJob.edges.map(document=>document.node.id === "Second-job_2" ? document.node.content :  null)} background="#FCF5F03D"/>
-            <Job position={data.allStrapiSecondJob.edges.map(document=>document.node.id === "Second-job_3" ? document.node.title :  null)} location={data.allStrapiSecondJob.edges.map(document=>document.node.id === "Second-job_3" ? document.node.content :  null)} />
-            <Job position={data.allStrapiSecondJob.edges.map(document=>document.node.id === "Second-job_4" ? document.node.title :  null)} location={data.allStrapiSecondJob.edges.map(document=>document.node.id === "Second-job_4" ? document.node.content :  null)} background="#FCF5F03D"/>
-            <Job position={data.allStrapiSecondJob.edges.map(document=>document.node.id === "Second-job_5" ? document.node.title :  null)} location={data.allStrapiSecondJob.edges.map(document=>document.node.id === "Second-job_5" ? document.node.content :  null)} />
-            <Job position={data.allStrapiSecondJob.edges.map(document=>document.node.id === "Second-job_6" ? document.node.title :  null)} location={data.allStrapiSecondJob.edges.map(document=>document.node.id === "Second-job_6" ? document.node.content :  null)} background="#FCF5F03D"/>
-            <Job position={data.allStrapiSecondJob.edges.map(document=>document.node.id === "Second-job_7" ? document.node.title :  null)} location={data.allStrapiSecondJob.edges.map(document=>document.node.id === "Second-job_7" ? document.node.content :  null)} />
+            <Job position={data.allStrapiSecondJob.edges.map(document=>document.node.id === "Second-job_1" ? document.node.title :  null)} location={data.allStrapiSecondJob.edges.map(document=>document.node.id === "Second-job_1" ? document.node.content :  null)} url={data.allStrapiSecondJob.edges.map(document=>document.node.id === "Second-job_1" ? document.node.url :  null)} />
+            <Job position={data.allStrapiSecondJob.edges.map(document=>document.node.id === "Second-job_2" ? document.node.title :  null)} location={data.allStrapiSecondJob.edges.map(document=>document.node.id === "Second-job_2" ? document.node.content :  null)} url={data.allStrapiSecondJob.edges.map(document=>document.node.id === "Second-job_2" ? document.node.url :  null)} background="#FCF5F03D"/>
+            <Job position={data.allStrapiSecondJob.edges.map(document=>document.node.id === "Second-job_3" ? document.node.title :  null)} location={data.allStrapiSecondJob.edges.map(document=>document.node.id === "Second-job_3" ? document.node.content :  null)} url={data.allStrapiSecondJob.edges.map(document=>document.node.id === "Second-job_3" ? document.node.url :  null)} />
+            <Job position={data.allStrapiSecondJob.edges.map(document=>document.node.id === "Second-job_4" ? document.node.title :  null)} location={data.allStrapiSecondJob.edges.map(document=>document.node.id === "Second-job_4" ? document.node.content :  null)} url={data.allStrapiSecondJob.edges.map(document=>document.node.id === "Second-job_4" ? document.node.url :  null)} background="#FCF5F03D"/>
+            <Job position={data.allStrapiSecondJob.edges.map(document=>document.node.id === "Second-job_5" ? document.node.title :  null)} location={data.allStrapiSecondJob.edges.map(document=>document.node.id === "Second-job_5" ? document.node.content :  null)} url={data.allStrapiSecondJob.edges.map(document=>document.node.id === "Second-job_5" ? document.node.url :  null)} />
+            <Job position={data.allStrapiSecondJob.edges.map(document=>document.node.id === "Second-job_6" ? document.node.title :  null)} location={data.allStrapiSecondJob.edges.map(document=>document.node.id === "Second-job_6" ? document.node.content :  null)} url={data.allStrapiSecondJob.edges.map(document=>document.node.id === "Second-job_6" ? document.node.url :  null)} background="#FCF5F03D"/>
+            <Job position={data.allStrapiSecondJob.edges.map(document=>document.node.id === "Second-job_7" ? document.node.title :  null)} location={data.allStrapiSecondJob.edges.map(document=>document.node.id === "Second-job_7" ? document.node.content :  null)} url={data.allStrapiSecondJob.edges.map(document=>document.node.id === "Second-job_7" ? document.node.url :  null)} />
 
         </Container>
     )

@@ -274,6 +274,13 @@ export const FirstSlide = ({title, description, image}) => {
                     }
                   }
                 }
+                mobile {
+                  localFile {
+                    childImageSharp {
+                      gatsbyImageData(layout: FIXED)
+                    }
+                  }
+                }
                 id
                 content
               }
@@ -286,17 +293,25 @@ export const FirstSlide = ({title, description, image}) => {
     const FilterQuery1 = ImageQuery1.filter(document=>document !== null ? document : null )
     const Image1 = FilterQuery1[0].gatsbyImageData
 
-    const ImageQuery2 = data.allStrapiCarousel.edges.map(document=>document.node.id === "Carousel_2" ? document.node.picture.localFile.childImageSharp : null)
+    const ImageQuery2 = data.allStrapiCarousel.edges.map(document=>document.node.id === "Carousel_1" ? document.node.mobile.localFile.childImageSharp : null)
     const FilterQuery2 = ImageQuery2.filter(document=>document !== null ? document : null )
     const Image2 = FilterQuery2[0].gatsbyImageData
 
-    const ImageQuery3 = data.allStrapiCarousel.edges.map(document=>document.node.id === "Carousel_3" ? document.node.picture.localFile.childImageSharp : null)
+    const ImageQuery3 = data.allStrapiCarousel.edges.map(document=>document.node.id === "Carousel_2" ? document.node.picture.localFile.childImageSharp : null)
     const FilterQuery3 = ImageQuery3.filter(document=>document !== null ? document : null )
     const Image3 = FilterQuery3[0].gatsbyImageData
 
-    const ImageQuery4 = data.allStrapiCarousel.edges.map(document=>document.node.id === "Carousel_4" ? document.node.picture.localFile.childImageSharp : null)
+    const ImageQuery4 = data.allStrapiCarousel.edges.map(document=>document.node.id === "Carousel_2" ? document.node.mobile.localFile.childImageSharp : null)
     const FilterQuery4 = ImageQuery4.filter(document=>document !== null ? document : null )
     const Image4 = FilterQuery4[0].gatsbyImageData
+
+    const ImageQuery5 = data.allStrapiCarousel.edges.map(document=>document.node.id === "Carousel_5" ? document.node.picture.localFile.childImageSharp : null)
+    const FilterQuery5 = ImageQuery5.filter(document=>document !== null ? document : null )
+    const Image5 = FilterQuery5[0].gatsbyImageData
+
+    const ImageQuery6 = data.allStrapiCarousel.edges.map(document=>document.node.id === "Carousel_5" ? document.node.mobile.localFile.childImageSharp : null)
+    const FilterQuery6 = ImageQuery6.filter(document=>document !== null ? document : null )
+    const Image6 = FilterQuery6[0].gatsbyImageData
 
     return (
         <>
@@ -307,8 +322,8 @@ export const FirstSlide = ({title, description, image}) => {
             <StyledCircle src={circleslide} />
             <StyledGroupElements src={group} />
                 <ImageContainer lg={7} xl>
-                    <Styledimg  image={image == 'first' ? Image1 : Image2 } />
-                    <StyledDesktopimg image={image == 'first' ? Image3 : Image4} />
+                    <Styledimg  image={image == 'first' ? Image1 : image == 'second' ? Image3 : Image5 } />
+                    <StyledDesktopimg image={image == 'first' ? Image2 : image == 'second' ? Image4 : Image6} />
                 </ImageContainer>
                 <TextContainer>
                     <StyledSlogan>

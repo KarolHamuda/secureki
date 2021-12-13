@@ -82,6 +82,7 @@ export const WhatsNew = () => {
             id
             content
             title
+            url
             }
         }
         }
@@ -103,6 +104,7 @@ export const WhatsNew = () => {
                     description={data.allStrapiMfa.edges.map(document=>document.node.id === "Mfa_5" ? document.node.content :  null)}
                     link="→ Get the eBook"
                     picture='first'
+                    url={data.allStrapiMfa.edges.map(document=>document.node.id === "Mfa_5" ? document.node.url :  null)}
                     />
                 </StoriesCol>
                 <StoriesCol>
@@ -111,6 +113,7 @@ export const WhatsNew = () => {
                     description={data.allStrapiMfa.edges.map(document=>document.node.id === "Mfa_6" ? document.node.content :  null)}
                     link="→ Get the eBook"
                     picture='second'
+                    url={data.allStrapiMfa.edges.map(document=>document.node.id === "Mfa_6" ? document.node.url :  null)}
                     />
                 </StoriesCol>
                 <StoriesCol>   
@@ -119,6 +122,7 @@ export const WhatsNew = () => {
                     description={data.allStrapiMfa.edges.map(document=>document.node.id === "Mfa_7" ? document.node.content :  null)}
                     link="→ Read the Article"
                     picture='third'
+                    url={data.allStrapiMfa.edges.map(document=>document.node.id === "Mfa_7" ? document.node.url :  null)}
                     />
                 </StoriesCol>
             </StyledRow>

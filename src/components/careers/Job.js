@@ -1,6 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 import { Row, Col } from 'react-bootstrap'
+import { Link } from 'gatsby'
 
 const StyledRow = styled(Row)`
     margin: 0;
@@ -81,25 +82,51 @@ const StyledPointer = styled.div`
         display: flex;
         justify-content: flex-end;
     } 
-
-
-
 `
 
-const Job = ({position, location, background}) => {
+const StyledPositionLink = styled(Link)`
+    color: #114A4F;
+    text-decoration: none;
+    &:hover { 
+        color: #114A4F;
+        text-decoration: none;
+        cursor: pointer;
+    }
+`
+
+const StyledLocationLink = styled(Link)`
+    color: #073233;
+    text-decoration: none;
+    &:hover { 
+        color: #073233;
+        text-decoration: none;
+        cursor: pointer;
+    }
+`
+
+const Job = ({position, location, background, url}) => {
+
+    const UrlRemoval = (url) => {
+        let newUrl = url.toString()
+        let firstIndex = newUrl.indexOf('https')
+        let cutUrl = newUrl.slice(firstIndex)
+        let index = cutUrl.indexOf(',')
+        return cutUrl.slice(0, index)
+    }
+
     return (
         <StyledRow backgroundColor={background}>
             
                 <StyledPosition>
-                    {position}
+                <StyledPositionLink to={UrlRemoval(url)}>{position}</StyledPositionLink>
                 </StyledPosition>
                 <StyledLocation>
-                    {location}
+                <StyledLocationLink to={UrlRemoval(url)}>{location}</StyledLocationLink>
                 </StyledLocation>
                 <PointerContainer xs={2}>
                     <StyledPointer />
                 </PointerContainer>
-            
+                
         </StyledRow>
     )
 }

@@ -1,8 +1,9 @@
 import React from 'react'
 import styled from 'styled-components'
 import { Row } from 'react-bootstrap'
-import { graphql, useStaticQuery } from 'gatsby'
+import { Link, graphql, useStaticQuery } from 'gatsby'
 import { GatsbyImage } from 'gatsby-plugin-image'
+import { propTypes } from 'react-bootstrap/esm/Image'
 
 const Container = styled.div`
     width: 22.0625em;
@@ -89,7 +90,17 @@ const LinkContainer = styled(Row)`
 
 `
 
-const Card = ({title, description, link, picture}) => {
+const StyledLink = styled(Link)`
+    color: #073233;
+    text-decoration: none;
+    &:hover { 
+        color: #073233;
+        text-decoration: none;
+        cursor: pointer;
+    }
+`
+
+const Card = ({title, description, link, picture, url}) => {
     const data = useStaticQuery(graphql`
     query {
         allStrapiMfa {
@@ -109,6 +120,16 @@ const Card = ({title, description, link, picture}) => {
           }
     }
     `)
+
+    const UrlRemoval = (url) => {
+        let newUrl = url.toString()
+        let firstIndex = newUrl.indexOf('https')
+        let cutUrl = newUrl.slice(firstIndex)
+        let index = cutUrl.indexOf(',')
+        return cutUrl.slice(0, index)
+    }
+
+   
 
     const ImageQuery1 = data.allStrapiMfa.edges.map(document=>document.node.id === "Mfa_5" ? document.node.picture.localFile.childImageSharp : null)
     const FilterQuery1 = ImageQuery1.filter(document=>document !== null ? document : null )
@@ -137,7 +158,7 @@ const Card = ({title, description, link, picture}) => {
                 {description}
             </DescriptionContainer>
             <LinkContainer>
-                {link}
+                <StyledLink to={UrlRemoval(url)}>{link}</StyledLink>
             </LinkContainer>
             
         </Container>
@@ -145,3 +166,7 @@ const Card = ({title, description, link, picture}) => {
 }
 
 export default Card;
+
+Card.propTypes = {
+    url: propTypes.string
+};

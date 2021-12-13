@@ -79,7 +79,7 @@ const Slider = () => {
                         <FirstSlide title={data.allStrapiCarousel.edges.map(document=>document.node.id === "Carousel_2" ? document.node.title :  null)} description={data.allStrapiCarousel.edges.map(document=>document.node.id === "Carousel_2" ? document.node.content :  null)} image="second"/>
                     </Carousel.Item>
                     <Carousel.Item>
-                        <FirstSlide title={data.allStrapiCarousel.edges.map(document=>document.node.id === "Carousel_2" ? document.node.title :  null)} description={data.allStrapiCarousel.edges.map(document=>document.node.id === "Carousel_2" ? document.node.content :  null)} image="second"/>
+                        <FirstSlide title={data.allStrapiCarousel.edges.map(document=>document.node.id === "Carousel_5" ? document.node.title :  null)} description={data.allStrapiCarousel.edges.map(document=>document.node.id === "Carousel_5" ? document.node.content :  null)} image="third"/>
                     </Carousel.Item>
                 </StyledCarousel>
         </Container>
