@@ -186,7 +186,7 @@ const Culture = () => {
             <StyledRow xs={1} lg={2}>
                 <TextContainer xs lg={6} xxl={5}>
                     <StyledTitle>
-                        Our Culture
+                        {data.allStrapiAbout.edges.map(document=>document.node.id === "About_3" ? document.node.title :  null)}
                     </StyledTitle>
                     <StyledContent>
                         <TextRow>
