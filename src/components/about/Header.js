@@ -271,7 +271,7 @@ return (
                 <Container>
                     <StyledTitle>
                         <h1>
-                        About us
+                        {data.allStrapiAbout.edges.map(document=>document.node.id === "About_1" ? document.node.title :  null)}
                         </h1>
                     </StyledTitle>
                     <StyledContent>
