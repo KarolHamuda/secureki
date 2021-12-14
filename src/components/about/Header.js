@@ -242,6 +242,7 @@ export const AboutHeader = () => {
                   }
                   id
                   content
+                  bold
                   title
                 }
               }
