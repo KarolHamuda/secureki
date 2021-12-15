@@ -4,6 +4,7 @@ import { Row, Col } from 'react-bootstrap'
 import { Link } from 'gatsby'
 
 const StyledRow = styled(Row)`
+    display: ${props => props.url == null ? console.log(props.url) : 'block'} 
     margin: 0;
     height: 3rem;
     border-top: 1px outset RGB(17,74,79);
@@ -107,15 +108,22 @@ const StyledLocationLink = styled(Link)`
 const Job = ({position, location, background, url}) => {
 
     const UrlRemoval = (url) => {
+        if (url != null) { 
         let newUrl = url.toString()
         let firstIndex = newUrl.indexOf('https')
         let cutUrl = newUrl.slice(firstIndex)
         let index = cutUrl.indexOf(',')
-        return cutUrl.slice(0, index)
+        return cutUrl.slice(0, index)}
+        else return null;
     }
 
+    console.log(background)
+
+    const Color = ( (background !=1 && background !=3 && background !=5 && background !=7 && background !=9 && background !=11 && background !=13 && background !=15)) ? null : "#FCF5F03D";
+
+
     return (
-        <StyledRow backgroundColor={background}>
+        <StyledRow backgroundColor={Color} url={url}>
             
                 <StyledPosition>
                 <StyledPositionLink to={UrlRemoval(url)}>{position}</StyledPositionLink>

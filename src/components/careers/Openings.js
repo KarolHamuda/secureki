@@ -59,8 +59,8 @@ const Openings = () => {
                         Current openings
                         </h1>
                 </StyledTitle>
-                <SingleOpening section="Data" />
-                <SinglePE section="Product Engineering" />
+                <SingleOpening/>
+                <SinglePE/>
             
         </Container>
     )

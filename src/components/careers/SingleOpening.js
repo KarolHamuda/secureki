@@ -46,29 +46,28 @@ const SingleOpening = ({section}) => {
     const data = useStaticQuery(graphql`
     query {
         allStrapiSecondJob {
-            edges {
-              node {
-                id
-                content
-                title
-                url
-              }
+          edges {
+            node {
+              id
+              content
+              title
+              url
             }
           }
-    }
+        }
+      }
     `)
+
+    const Filtered = data.allStrapiSecondJob.edges.filter(document=>document.node.id != null)
+    console.log(Filtered)
+ 
     return (
         <Container>
             <StyledTitle>
-                {section}
+                Data
             </StyledTitle>
-            <Job position={data.allStrapiSecondJob.edges.map(document=>document.node.id === "Second-job_1" ? document.node.title :  null)} location={data.allStrapiSecondJob.edges.map(document=>document.node.id === "Second-job_1" ? document.node.content :  null)} url={data.allStrapiSecondJob.edges.map(document=>document.node.id === "Second-job_1" ? document.node.url :  null)} />
-            <Job position={data.allStrapiSecondJob.edges.map(document=>document.node.id === "Second-job_2" ? document.node.title :  null)} location={data.allStrapiSecondJob.edges.map(document=>document.node.id === "Second-job_2" ? document.node.content :  null)} url={data.allStrapiSecondJob.edges.map(document=>document.node.id === "Second-job_2" ? document.node.url :  null)} background="#FCF5F03D"/>
-            <Job position={data.allStrapiSecondJob.edges.map(document=>document.node.id === "Second-job_3" ? document.node.title :  null)} location={data.allStrapiSecondJob.edges.map(document=>document.node.id === "Second-job_3" ? document.node.content :  null)} url={data.allStrapiSecondJob.edges.map(document=>document.node.id === "Second-job_3" ? document.node.url :  null)} />
-            <Job position={data.allStrapiSecondJob.edges.map(document=>document.node.id === "Second-job_4" ? document.node.title :  null)} location={data.allStrapiSecondJob.edges.map(document=>document.node.id === "Second-job_4" ? document.node.content :  null)} url={data.allStrapiSecondJob.edges.map(document=>document.node.id === "Second-job_4" ? document.node.url :  null)} background="#FCF5F03D"/>
-            <Job position={data.allStrapiSecondJob.edges.map(document=>document.node.id === "Second-job_5" ? document.node.title :  null)} location={data.allStrapiSecondJob.edges.map(document=>document.node.id === "Second-job_5" ? document.node.content :  null)} url={data.allStrapiSecondJob.edges.map(document=>document.node.id === "Second-job_5" ? document.node.url :  null)} />
-            <Job position={data.allStrapiSecondJob.edges.map(document=>document.node.id === "Second-job_6" ? document.node.title :  null)} location={data.allStrapiSecondJob.edges.map(document=>document.node.id === "Second-job_6" ? document.node.content :  null)} url={data.allStrapiSecondJob.edges.map(document=>document.node.id === "Second-job_6" ? document.node.url :  null)} background="#FCF5F03D"/>
-            <Job position={data.allStrapiSecondJob.edges.map(document=>document.node.id === "Second-job_7" ? document.node.title :  null)} location={data.allStrapiSecondJob.edges.map(document=>document.node.id === "Second-job_7" ? document.node.content :  null)} url={data.allStrapiSecondJob.edges.map(document=>document.node.id === "Second-job_7" ? document.node.url :  null)} />
+            {Filtered.map((document, i)=><Job position={document.node.title} location={document.node.content} url={document.node.url} background={i}  />)}
+ 
 
         </Container>
     )
