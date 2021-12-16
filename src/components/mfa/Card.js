@@ -37,7 +37,7 @@ const ImageContainer = styled(GatsbyImage)`
     margin-bottom: 1.875em;
     
     padding: 0;
-
+    max-height: 13.75rem;
     width: 22.3125em;
 `
 

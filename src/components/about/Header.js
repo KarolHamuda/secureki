@@ -147,9 +147,11 @@ const ButtonContainer = styled.div`
 `
 
 const StyledImage = styled(Img)`
-    position: absolute;
+    
     z-index: 2;
     width: 69.125rem;
+    max-width: 69.125rem;
+    max-height: 25.625rem;
     margin-top: 8.1563rem;
     margin-left: 10.4375rem;
     @media (max-width: 991px) {
@@ -185,7 +187,7 @@ const StyledMobileImage = styled(Img)`
 const StyledElements = styled.img`
     position: absolute;
     z-index: 1;
-    margin-top: 28.9063rem;
+    margin-top: 25.9063rem;
     margin-left: 73.5625rem;
     @media (max-width: 1439px) {
         display: none;
@@ -195,7 +197,7 @@ const StyledElements = styled.img`
 const StyledRec = styled.img`
     position: absolute;
     z-index: 1; 
-    margin-top: 5rem;
+    margin-top: 2.2rem;
     margin-left: 6rem;
     @media (max-width: 991px) {
         display: none;
@@ -286,15 +288,15 @@ return (
                     {data.allStrapiButtons.edges.map(document=>document.node.id === "Buttons_6" ? document.node.title :  null)}
                     </MFAButton>
                 </ButtonContainer>
-                
+                <StyledElements src={elementsgroup} /> 
+                <StyledRec src={rec} />
                 </Container>
                 
                         <Wrapper><StyledImage fluid={FilterQuery} /></Wrapper>
                         <Wrapper><StyledMobileImage fluid={FilterQuery2} /></Wrapper>
                      
                   
-                <StyledElements src={elementsgroup} /> 
-                <StyledRec src={rec} />
+                
                 
     </Layout>
     
