@@ -61,6 +61,7 @@ const TextContainer = styled(Row)`
 
 const ImageContainer = styled(GatsbyImage)`
     max-width: 4.0625rem;
+    max-height: 4.1875rem;
     border-radius: 50%;
     margin-left: 2.0625em;
     margin-bottom: 2.4375em;
@@ -149,10 +150,10 @@ const StoriesCard = ({story, image, title, position}) => {
             <Row style={{margin: 0}}>
                 <Col xs={4} style={{padding: 0}}>
                     {image === "andrea" ? 
-                    <ImageContainer image={Image1} /> : 
+                    <ImageContainer image={Image3} /> : 
                     image === "ketut" ? 
                     <ImageContainer image={Image2} /> : 
-                    <ImageContainer image={Image3} />}                    
+                    <ImageContainer image={Image1} />}                    
                 </Col>
                 <Col>
                     <TitleContainer>
